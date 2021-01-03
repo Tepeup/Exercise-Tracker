@@ -22,10 +22,10 @@
 .nav{
   position:fixed;
   top:0;
-  background-color: #252525;
+  background-color: #21262b;
   width:100vw;
-  display: grid;
-  justify-content: right;
+  font-family: Montserrat, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 .footer {

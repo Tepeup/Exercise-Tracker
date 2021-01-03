@@ -42,6 +42,66 @@ if (firebase.apps.length === 0) {
 export const auth = firebase.auth();
 const firestore = firebase.firestore();
 
+const twitter = new firebase.auth.TwitterAuthProvider();
+twitter.setCustomParameters({
+  prompt: "select_account",
+});
+export const signInWithTwitter = () =>
+  auth
+    .signInWithPopup(twitter)
+    .then((result) => {
+      /** @type {firebase.auth.OAuthCredential} */
+      var credential = result.credential;
+
+      // This gives you a the Twitter OAuth 1.0 Access Token and Secret.
+      // You can use these server side with your app's credentials to access the Twitter API.
+      var token = credential.accessToken;
+      var secret = credential.secret;
+      // The email of the user's account used.
+      var email = error.email;
+      // The signed-in user info.
+      var displayName = result.user;
+      // ...
+    })
+    .catch((error) => {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // The email of the user's account used.
+      var email = error.email;
+      // The firebase.auth.AuthCredential type that was used.
+      var credential = error.credential;
+      // ...
+    });
+
+const github = new firebase.auth.GithubAuthProvider();
+github.setCustomParameters({ prompt: "select_account" });
+export const signInWithGithub = () =>
+  auth
+    .signInWithPopup(github)
+    .then((result) => {
+      /** @type {firebase.auth.OAuthCredential} */
+      var credential = result.credential;
+
+      // This gives you a GitHub Access Token. You can use it to access the GitHub API.
+      var token = credential.accessToken;
+      // The email of the user's account used.
+      var email = error.email;
+      // The signed-in user info.
+      var displayName = result.user;
+      // ...
+    })
+    .catch((error) => {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // The email of the user's account used.
+      var email = error.email;
+      // The firebase.auth.AuthCredential type that was used.
+      var credential = error.credential;
+      // ...
+    });
+
 const provider = new firebase.auth.GoogleAuthProvider();
 provider.setCustomParameters({ prompt: "select_account" });
 export const signInWithGoogle = () => auth.signInWithPopup(provider);

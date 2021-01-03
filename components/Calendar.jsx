@@ -11,24 +11,26 @@ export default function Calendar(props) {
       e.map((ex) => ({
         date: ex,
         month: props.month,
-        colorCode: "#757575",
+        colorCode: "#556171",
       }))
     );
 
   const todaysMonth = moment().month();
   const todaysDate = moment().date();
+  const todaysYear = moment().year();
   const monthStringName = moment().month(props.month).format("MMMM");
 
   //Hooks
   const [cellInfo, setCellInfo] = useState(arrayToObjectArray);
   const [calendarData, setCalendarData] = useState(cellInfo);
 
+  // Get month data from Firebase
   useEffect(() => {
     const firestore = firebase.firestore();
     firestore
       .collection("Charts")
       .doc(`${props.user.id}`)
-      .collection("Months")
+      .collection(`${todaysYear}`)
       .doc(`${monthStringName}`)
       .get()
       .then((snapshot) => {
@@ -40,6 +42,7 @@ export default function Calendar(props) {
       });
   }, []);
 
+  // might use in future
   function dateFromDay(day, month) {
     var date = new Date(moment().year(), month); // initialize a date in `year-01-01`
     return new Date(date.setDate(day)); // add the number of days
@@ -59,7 +62,7 @@ export default function Calendar(props) {
         .firestore()
         .collection("Charts")
         .doc(`${props.user.id}`)
-        .collection(`Months`)
+        .collection(`${todaysYear}`)
         .doc(`${monthStringName}`)
         .set({ chartData: `${JSON.stringify(copyGrid)}` })
         .catch((error) => {
@@ -71,30 +74,45 @@ export default function Calendar(props) {
   };
 
   return (
-    <div className="cal-month" data-index={props.num}>
-      <span className="month-title">{monthStringName}</span>
-
-      {calendarData &&
-        calendarData.map((e, i) => (
-          <div key={i} data-index={i} className="cal-week">
-            {e.map((x, i) => (
-              <div
-                key={i}
-                data-index={i}
-                id={x.date}
-                className={`cal-day ${x.date == 0 ? "hidden" : ""} ${
-                  x.date === todaysDate && props.month === todaysMonth
-                    ? "active"
-                    : ""
-                }`}
-                style={{ backgroundColor: x.colorCode }}
-                onClick={handleCellClick}
-              >
-                {x.date}
-              </div>
-            ))}
-          </div>
-        ))}
+    <div
+      className={`cal-month-container ${
+        props.mini && "cal-month-container-mini"
+      }`}
+    >
+      <span
+        className={`month-title ${props.mini && "month-title-mini"}`}
+      >{`${monthStringName} ${todaysYear}`}</span>
+      <div
+        className={`cal-month ${props.mini && "cal-month-mini"}`}
+        data-index={props.num}
+      >
+        {calendarData &&
+          calendarData.map((e, i) => (
+            <div
+              key={i}
+              data-index={i}
+              className={`cal-week ${props.mini && "cal-week-mini"}`}
+            >
+              {e.map((x, i) => (
+                <div
+                  key={i}
+                  data-index={i}
+                  id={x.date}
+                  className={`cal-day ${x.date == 0 ? "hidden" : ""} ${
+                    x.date === todaysDate && props.month === todaysMonth
+                      ? "active"
+                      : ""
+                  }
+                  ${props.mini && "cal-day-mini"}`}
+                  style={{ backgroundColor: x.colorCode }}
+                  onClick={handleCellClick}
+                >
+                  {x.date}
+                </div>
+              ))}
+            </div>
+          ))}
+      </div>
     </div>
   );
 }

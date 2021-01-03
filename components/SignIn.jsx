@@ -1,4 +1,8 @@
-import { signInWithGoogle } from "../firebase/firebase.utils";
+import {
+  signInWithGoogle,
+  signInWithGithub,
+  signInWithTwitter,
+} from "../firebase/firebase.utils";
 import {
   faGoogle,
   faGithub,
