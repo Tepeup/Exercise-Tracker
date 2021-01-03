@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Calendar from "./Calendar";
+import SignIn from "./SignIn";
+import firebase from "firebase/app";
+import "firebase/firestore";
+import Nav from "./Nav";
 
-export default function Dashboard() {
+export default function Dashboard(props) {
   //Hooks
   const [workoutColor, setWorkoutColor] = useState("#fffe01");
   const [selectedColor, setSelectedColor] = useState(0);
@@ -32,12 +36,21 @@ export default function Dashboard() {
             ></div>
           ))}
         </div>
+        <Nav />
 
-        <div className="cal-year">
-          {monthsArray.map((num, i) => (
-            <Calendar month={num} color={workoutColor} index={i} />
-          ))}
-        </div>
+        {
+          <div className="cal-year">
+            {monthsArray.map((num, i) => (
+              <Calendar
+                month={num}
+                color={workoutColor}
+                index={i}
+                user={props.user}
+                key={i}
+              />
+            ))}
+          </div>
+        }
       </div>
     </div>
   );
