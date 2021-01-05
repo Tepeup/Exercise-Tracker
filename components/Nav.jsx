@@ -26,7 +26,7 @@ export default function Nav(props) {
             )}
           </button>
         </li>
-        <li>{props.user.displayName}</li>
+        <li>{props.user.displayName ? props.user.displayName : "Preview"}</li>
 
         <li>
           <button title="Sign Out" onClick={() => auth.signOut()}>

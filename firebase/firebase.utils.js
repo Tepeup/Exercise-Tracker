@@ -13,7 +13,9 @@ const firebaseConfig = {
 };
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
+  // if no userAuth exit function
   if (!userAuth) return;
+
   const userRef = firestore.doc(`Users/${userAuth.uid}`);
   const snapShot = await userRef.get();
 
@@ -46,6 +48,17 @@ const twitter = new firebase.auth.TwitterAuthProvider();
 twitter.setCustomParameters({
   prompt: "select_account",
 });
+
+const provider = new firebase.auth.GoogleAuthProvider();
+provider.setCustomParameters({ prompt: "select_account" });
+export const signInWithGoogle = () => auth.signInWithPopup(provider);
+
+export const signinAnonymously = () => auth.signInAnonymously();
+
+export default firebase;
+
+// Sign in options to include in future
+
 export const signInWithTwitter = () =>
   auth
     .signInWithPopup(twitter)
@@ -101,9 +114,3 @@ export const signInWithGithub = () =>
       var credential = error.credential;
       // ...
     });
-
-const provider = new firebase.auth.GoogleAuthProvider();
-provider.setCustomParameters({ prompt: "select_account" });
-export const signInWithGoogle = () => auth.signInWithPopup(provider);
-
-export default firebase;

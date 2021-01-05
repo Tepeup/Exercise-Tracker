@@ -40,14 +40,18 @@ export default class Home extends React.Component {
     return (
       <div className={styles.container}>
         <Head>
-          <title>Workout Tracker Yearly</title>
+          <title>Year Tracker</title>
+          <meta name="author" content="Tepeu Potter"></meta>
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+          ></meta>
           <link rel="icon" href="/favicon.ico" />
           <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Montserrat"
           />
         </Head>
-
         <main className={styles.main}>
           {this.state.currentUser ? (
             <Dashboard user={this.state.currentUser} />
@@ -55,8 +59,6 @@ export default class Home extends React.Component {
             <SignIn />
           )}
         </main>
-
-        {/* <footer className={styles.footer}></footer> */}
       </div>
     );
   }

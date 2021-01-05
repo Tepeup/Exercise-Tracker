@@ -127,6 +127,9 @@ display: none;
   .month-title{
     padding-left: .5em !important;
   }
+  li{
+    font-size: 1.5em !important;
+  }
 }
 .cal-day{
   display: grid;
@@ -191,7 +194,7 @@ li{
   width:fit-content;
   color: white;
   font-weight:bold;
-  font-size:32px;
+  font-size: 2em ;
   height: 50px;
   display: grid;
   align-content: center;
@@ -218,7 +221,7 @@ nav button{
 
 .login-card{
   width:350px;
-  height:420px;
+  height:auto;
   max-height: 100vh;
   background-color: #21262b;
   display: grid;
@@ -253,8 +256,6 @@ nav button{
   border: solid white 1px;
 }
 
-
-
 svg{
 background: none;
 width: 25px;
@@ -279,7 +280,9 @@ justify-self: center;
     align-self: center ;
     font-size: 1.2em;
 }
-
+.login-card svg{
+  align-self: center;
+}
 .mini-toggle {
   position: fixed;
   bottom:12%;
@@ -288,8 +291,12 @@ justify-self: center;
 
 .mini-button {
   background: transparent;
-
   height: 50px;
   width:50px;
  
+}
+
+.preview-button {
+  width: 150px !important;
+  border: none !important
 }

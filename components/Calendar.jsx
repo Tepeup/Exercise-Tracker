@@ -5,26 +5,28 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 
 export default function Calendar(props) {
+  // Converting the calendar array form calendar-js to an array of objects with relevant info
   let arrayToObjectArray = calendar()
     .of(moment().year(), props.month)
-    .calendar.map((e) =>
-      e.map((ex) => ({
-        date: ex,
+    .calendar.map((el) =>
+      el.map((el) => ({
+        date: el,
         month: props.month,
         colorCode: "#556171",
       }))
     );
 
+  // date variables used throughout
   const todaysMonth = moment().month();
   const todaysDate = moment().date();
   const todaysYear = moment().year();
   const monthStringName = moment().month(props.month).format("MMMM");
 
-  //Hooks
+  // Hooks
   const [cellInfo, setCellInfo] = useState(arrayToObjectArray);
   const [calendarData, setCalendarData] = useState(cellInfo);
 
-  // Get month data from Firebase
+  // Get users month data from Firebase
   useEffect(() => {
     const firestore = firebase.firestore();
     firestore
@@ -43,15 +45,18 @@ export default function Calendar(props) {
   }, []);
 
   // might use in future
-  function dateFromDay(day, month) {
-    var date = new Date(moment().year(), month); // initialize a date in `year-01-01`
-    return new Date(date.setDate(day)); // add the number of days
-  }
+  // function dateFromDay(day, month) {
+  //   var date = new Date(moment().year(), month); // initialize a date in `year-01-01`
+  //   return new Date(date.setDate(day)); // add the number of days
+  // }
 
   let handleCellClick = async (el) => {
     if (el.target.className.includes("active")) {
       let copyGrid = [...calendarData];
-      const cellNumber = Number(el.target.id);
+
+      // might use in future
+      // const cellNumber = Number(el.target.id);
+
       const xIndex = el.target.parentElement.getAttribute("data-index");
       const yIndex = el.target.getAttribute("data-index");
       let mutatedOject = copyGrid[xIndex][yIndex];
