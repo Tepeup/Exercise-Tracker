@@ -93,15 +93,19 @@ export const signInWithGithub = () =>
   auth
     .signInWithPopup(github)
     .then((result) => {
+      return result.user.updateProfile({
+        displayName: result.additionalUserInfo.username,
+      });
+      console.log(result.additionalUserInfo.username);
       /** @type {firebase.auth.OAuthCredential} */
       var credential = result.credential;
 
       // This gives you a GitHub Access Token. You can use it to access the GitHub API.
       var token = credential.accessToken;
       // The email of the user's account used.
-      var email = error.email;
+      var email = result.user.email;
       // The signed-in user info.
-      var displayName = result.user;
+      var displayName = result.additionalUserInfo.username;
       // ...
     })
     .catch((error) => {
@@ -113,4 +117,5 @@ export const signInWithGithub = () =>
       // The firebase.auth.AuthCredential type that was used.
       var credential = error.credential;
       // ...
+      prompt(errorMessage);
     });

@@ -4,6 +4,7 @@ import {
   faSignOutAlt,
   faTh,
   faThList,
+  faEdit,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -26,7 +27,7 @@ export default function Nav(props) {
             )}
           </button>
         </li>
-        <li>{props.user.displayName ? props.user.displayName : "Preview"}</li>
+        <li>{props.user.displayName ? props.user.displayName : "Welcome"}</li>
 
         <li>
           <button title="Sign Out" onClick={() => auth.signOut()}>

@@ -22,20 +22,18 @@ export default function SignIn() {
         <FontAwesomeIcon icon={faGoogle} />
         <div className="button-title">Login via Google</div>
       </button>
+      <button onClick={signInWithGithub}>
+        <FontAwesomeIcon size={"small"} icon={faGithub} />
+        <div className="button-title"> Login via Github</div>
+      </button>
       <button onClick={signinAnonymously} className="preview-button">
         <FontAwesomeIcon icon={faEye} />
         <div className="button-title">preview</div>
       </button>
 
-      {/* 
-      Will include in future 
-      <button onClick={signInWithTwitter}>
+      {/* <button onClick={signInWithTwitter}>
         <FontAwesomeIcon size={"small"} icon={faTwitter} />
         <div className="button-title">Login via Twtiter</div>
-      </button>
-      <button onClick={signInWithGithub}>
-        <FontAwesomeIcon size={"small"} icon={faGithub} />
-        <div className="button-title"> Login via Github</div>
       </button> */}
     </div>
   );
