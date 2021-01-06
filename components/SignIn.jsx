@@ -23,7 +23,7 @@ export default function SignIn() {
         <div className="button-title">Login via Google</div>
       </button>
       <button onClick={signInWithGithub}>
-        <FontAwesomeIcon size={"small"} icon={faGithub} />
+        <FontAwesomeIcon icon={faGithub} />
         <div className="button-title"> Login via Github</div>
       </button>
       <button onClick={signinAnonymously} className="preview-button">
