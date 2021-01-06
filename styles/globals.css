@@ -49,7 +49,6 @@ a {
 
 .color-block {
   display: grid;
-  padding:20px;
   width:20vw;
   height: 80px;
   cursor: pointer;
