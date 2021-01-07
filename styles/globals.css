@@ -121,6 +121,7 @@ display: none;
     display: grid;
     grid-template-columns: repeat(2,1fr) !important;
     grid-gap:.5em;
+    padding: 85px .5em
  
   
   }
