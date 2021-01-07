@@ -3,6 +3,8 @@ import calendar from "calendar-js";
 import moment from "moment";
 import firebase from "firebase/app";
 import "firebase/firestore";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function Calendar(props) {
   // Converting the calendar array form calendar-js to an array of objects with relevant info
@@ -25,6 +27,18 @@ export default function Calendar(props) {
   // Hooks
   const [cellInfo, setCellInfo] = useState(arrayToObjectArray);
   const [calendarData, setCalendarData] = useState(cellInfo);
+
+  const reducer = (accumulator, currentValue) => accumulator + currentValue;
+  const attempt = calendarData
+    .map((x) =>
+      x.map((e) =>
+        e.colorCode == "#556171" || e.colorCode == "rgb(85, 97, 113)" ? 0 : 1
+      )
+    )
+    .map((x) => x.reduce(reducer))
+    .reduce(reducer);
+
+  console.log(props.month, attempt);
 
   // Get users month data from Firebase
   useEffect(() => {
@@ -84,9 +98,27 @@ export default function Calendar(props) {
         props.mini && "cal-month-container-mini"
       }`}
     >
-      <span
-        className={`month-title ${props.mini && "month-title-mini"}`}
-      >{`${monthStringName} ${todaysYear}`}</span>
+      <span className={`month-title ${props.mini && "month-title-mini"}`}>
+        {`${monthStringName} ${todaysYear}  `}
+        <FontAwesomeIcon
+          id={attempt > 1 ? null : "incomplete"}
+          icon={faStar}
+          title={"One Star Achievement"}
+          color={"#ede900"}
+        />{" "}
+        <FontAwesomeIcon
+          id={attempt > 9 ? null : "incomplete"}
+          icon={faStar}
+          title={"Two Star Achievement"}
+          color={"#ede900"}
+        />{" "}
+        <FontAwesomeIcon
+          id={attempt > 19 ? null : "incomplete"}
+          icon={faStar}
+          title={"Three Star Achievement"}
+          color={"#ede900"}
+        />
+      </span>
       <div
         className={`cal-month ${props.mini && "cal-month-mini"}`}
         data-index={props.num}

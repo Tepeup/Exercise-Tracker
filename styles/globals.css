@@ -161,9 +161,7 @@ display: none;
 
 }
 
-.cal-day:hover{
-  box-shadow:0px 0px 0px 5px #21262b inset;
-}
+
   
 .active {
   box-shadow:0px 0px 0px 5px #21262B inset;
@@ -173,6 +171,9 @@ display: none;
   transition: transform  1s, background-color 1s;
 }
 
+#incomplete{
+ display: none;
+}
 
 
 .dashboard {
