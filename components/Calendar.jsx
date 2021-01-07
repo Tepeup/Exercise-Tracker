@@ -19,10 +19,13 @@ export default function Calendar(props) {
     );
 
   // date variables used throughout
+
   const todaysMonth = moment().month();
   const todaysDate = moment().date();
   const todaysYear = moment().year();
   const monthStringName = moment().month(props.month).format("MMMM");
+  const yearMonth = moment([todaysYear]).month(props.month).format("YYYY-MM");
+  const daysInMonth = moment(yearMonth, "YYYY-MM").daysInMonth();
 
   // Hooks
   const [cellInfo, setCellInfo] = useState(arrayToObjectArray);
@@ -37,8 +40,6 @@ export default function Calendar(props) {
     )
     .map((x) => x.reduce(reducer))
     .reduce(reducer);
-
-  console.log(props.month, attempt);
 
   // Get users month data from Firebase
   useEffect(() => {
@@ -101,22 +102,19 @@ export default function Calendar(props) {
       <span className={`month-title ${props.mini && "month-title-mini"}`}>
         {`${monthStringName} ${todaysYear}  `}
         <FontAwesomeIcon
-          id={attempt > 4 ? null : "incomplete"}
+          id={attempt > 4 ? "complete" : "incomplete"}
           icon={faStar}
-          title={"One Star Achievement"}
-          color={"#ede900"}
+          title={` One Star 5/${daysInMonth} days`}
         />{" "}
         <FontAwesomeIcon
-          id={attempt > 9 ? null : "incomplete"}
+          id={attempt > 9 ? "complete" : "incomplete"}
           icon={faStar}
-          title={"Two Star Achievement"}
-          color={"#ede900"}
+          title={`Two Star 10/${daysInMonth} days`}
         />{" "}
         <FontAwesomeIcon
-          id={attempt > 19 ? null : "incomplete"}
+          id={attempt > 19 ? "complete" : "incomplete"}
           icon={faStar}
-          title={"Three Star Achievement"}
-          color={"#ede900"}
+          title={`Three Star 20/${daysInMonth} days`}
         />
       </span>
       <div

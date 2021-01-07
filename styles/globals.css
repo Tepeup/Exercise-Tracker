@@ -124,7 +124,7 @@ display: none;
     width:40vw
   }
   .month-title{
-    padding-left: .5em !important;
+    padding-left: .25em !important;
   }
   li{
     font-size: 1.2em !important;
@@ -172,7 +172,11 @@ display: none;
 }
 
 #incomplete{
- display: none;
+ color: #556171
+}
+
+#complete {
+  color: #EDE92C
 }
 
 
