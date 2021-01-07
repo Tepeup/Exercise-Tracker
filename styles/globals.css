@@ -139,6 +139,7 @@ display: none;
   font-weight: bold;
   color:white;
   transition: background-color 1s;
+  box-shadow:0px 0px 0px 2px #21262b1f inset;
 }
 
 
@@ -159,9 +160,13 @@ display: none;
   transition: transform 1s;
 
 }
+
+.cal-day:hover{
+  box-shadow:0px 0px 0px 5px #21262b inset;
+}
   
 .active {
-  box-shadow:0px 0px 0px 5px #21262b inset;
+  box-shadow:0px 0px 0px 5px #21262B inset;
 }
 .active:hover{
   transform: scale(1.5);
