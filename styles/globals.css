@@ -154,7 +154,7 @@ display: none;
   font-size: 1em;
   font-weight: bold;
   height:100px;
-  transform: translateY(33%);
+  transform: translateY(20%);
   transition: transform 1s;
 
 }
