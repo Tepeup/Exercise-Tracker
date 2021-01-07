@@ -12,7 +12,7 @@ export default function Dashboard(props) {
   const colorPalette = ["#556171", "#ede900", "#ff8606", "#e83b36", "#600538"];
 
   // Hooks
-  const [workoutColor, setWorkoutColor] = useState("#fffe01");
+  const [workoutColor, setWorkoutColor] = useState("#ede900");
   const [selectedColor, setSelectedColor] = useState(0);
   const [miniView, setMiniView] = useState(false);
 
