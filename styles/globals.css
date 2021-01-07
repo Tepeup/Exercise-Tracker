@@ -114,10 +114,14 @@ display: none;
   .cal-week {
     width:100vw;
   }
+  .cal-year{
+    padding: 65px .5em
+  }
   .cal-year-mini{
     display: grid;
     grid-template-columns: repeat(2,1fr) !important;
     grid-gap:.5em;
+ 
   
   }
   .cal-week-mini {
