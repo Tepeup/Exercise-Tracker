@@ -101,7 +101,7 @@ export default function Calendar(props) {
       <span className={`month-title ${props.mini && "month-title-mini"}`}>
         {`${monthStringName} ${todaysYear}  `}
         <FontAwesomeIcon
-          id={attempt > 1 ? null : "incomplete"}
+          id={attempt > 4 ? null : "incomplete"}
           icon={faStar}
           title={"One Star Achievement"}
           color={"#ede900"}
