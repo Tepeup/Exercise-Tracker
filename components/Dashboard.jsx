@@ -9,7 +9,6 @@ import ColorPalette from "./ColorPalette";
 export default function Dashboard(props) {
   // Hardcoded Arrays
   const monthsArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-  const colorPalette = ["#556171", "#ede900", "#ff8606", "#e83b36", "#600538"];
 
   // Hooks
   const [workoutColor, setWorkoutColor] = useState("#ff8606");
@@ -30,10 +29,10 @@ export default function Dashboard(props) {
     <div className="dashboard">
       <div className="dashboard__body">
         <Nav user={props.user} miniClick={handleMiniClick} mini={miniView} />
-        <ColorPalette
+        {/* <ColorPalette
           colorSelection={handleColorSelection}
           color={selectedColor}
-        />
+        /> */}
 
         <div className={`cal-year ${miniView && "cal-year-mini"}`}>
           {monthsArray.map((num, i) => (

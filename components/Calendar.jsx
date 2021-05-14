@@ -5,6 +5,20 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Modal from "@material-ui/core/Modal";
+import { makeStyles } from "@material-ui/core/styles";
+import Backdrop from "@material-ui/core/Backdrop";
+import Fade from "@material-ui/core/Fade";
+import WorkoutModal from "../components/WorkoutModal";
+import Dialog from "@material-ui/core/Dialog";
+
+const useStyles = makeStyles((theme) => ({
+  modal: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+}));
 
 export default function Calendar(props) {
   // Converting the calendar array form calendar-js to an array of objects with relevant info
@@ -23,13 +37,55 @@ export default function Calendar(props) {
   const todaysMonth = moment().month();
   const todaysDate = moment().date();
   const todaysYear = moment().year();
+  const currentMonthString = moment().month(todaysMonth).format("MMMM");
   const monthStringName = moment().month(props.month).format("MMMM");
   const yearMonth = moment([todaysYear]).month(props.month).format("YYYY-MM");
   const daysInMonth = moment(yearMonth, "YYYY-MM").daysInMonth();
 
+  // Set window to current month
+  setTimeout(function () {
+    if (!props.mini) {
+      window.location.hash = `${currentMonthString}`;
+      if (currentMonthString == monthStringName) {
+        window.scrollBy(0, -50);
+      }
+    }
+  }, 300);
+
   // Hooks
+  const classes = useStyles();
   const [cellInfo, setCellInfo] = useState(arrayToObjectArray);
   const [calendarData, setCalendarData] = useState(cellInfo);
+  const [open, setOpen] = useState({
+    state: false,
+    month: null,
+    day: null,
+    year: null,
+    week: null,
+    weekDay: null,
+  });
+
+  const handleOpen = (month, day, year, week, weekDay) => {
+    setOpen({
+      state: true,
+      month: month,
+      day: day,
+      year: year,
+      week: week,
+      weekDay: weekDay,
+    });
+  };
+
+  const handleClose = () => {
+    setOpen({
+      state: false,
+      month: null,
+      day: null,
+      year: null,
+      week: 0,
+      weekDay: 0,
+    });
+  };
 
   const reducer = (accumulator, currentValue) => accumulator + currentValue;
   const attempt = calendarData
@@ -59,12 +115,6 @@ export default function Calendar(props) {
       });
   }, []);
 
-  // might use in future
-  // function dateFromDay(day, month) {
-  //   var date = new Date(moment().year(), month); // initialize a date in `year-01-01`
-  //   return new Date(date.setDate(day)); // add the number of days
-  // }
-
   let handleCellClick = async (el) => {
     if (el.target.className.includes("active")) {
       let copyGrid = [...calendarData];
@@ -93,12 +143,79 @@ export default function Calendar(props) {
     }
   };
 
+  let handleModalSubmit = async (day, week, color, workout, notes) => {
+    let copyGrid = [...calendarData];
+
+    let mutatedOject = copyGrid[week][day];
+    console.log(day, week, color, workout, notes);
+
+    copyGrid[week][day] = {
+      ...mutatedOject,
+      colorCode: color,
+      workout: workout,
+      notes: notes,
+    };
+    setOpen({
+      state: false,
+      month: null,
+      day: null,
+      year: null,
+      week: 0,
+      weekDay: 0,
+    });
+
+    await firebase
+      .firestore()
+      .collection("Charts")
+      .doc(`${props.user.id}`)
+      .collection(`${todaysYear}`)
+      .doc(`${monthStringName}`)
+      .set({ chartData: `${JSON.stringify(copyGrid)}` })
+      .catch((error) => {
+        alert(`Error`, error);
+      });
+
+    setCalendarData(copyGrid);
+  };
+
   return (
     <div
       className={`cal-month-container ${
         props.mini && "cal-month-container-mini"
       }`}
+      id={`${monthStringName}`}
     >
+      <div>
+        <Dialog
+          fullScreen
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          className={classes.modal}
+          open={open.state}
+          onClose={handleClose}
+          overflow="scroll"
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+          }}
+        >
+          <Fade in={open.state}>
+            <div>
+              <WorkoutModal
+                close={handleClose}
+                month={open.month}
+                day={open.day}
+                year={open.year}
+                week={open.week}
+                weekDay={open.weekDay}
+                submit={handleModalSubmit}
+                calendar={calendarData}
+              />
+            </div>
+          </Fade>
+        </Dialog>
+      </div>
       <span className={`month-title ${props.mini && "month-title-mini"}`}>
         {`${monthStringName} ${todaysYear}  `}
         <FontAwesomeIcon
@@ -140,7 +257,15 @@ export default function Calendar(props) {
                   }
                   ${props.mini && "cal-day-mini"}`}
                   style={{ backgroundColor: x.colorCode }}
-                  onClick={handleCellClick}
+                  onClick={(e) =>
+                    handleOpen(
+                      monthStringName,
+                      x.date,
+                      todaysYear,
+                      e.target.parentElement.getAttribute("data-index"),
+                      i
+                    )
+                  }
                 >
                   {x.date}
                 </div>

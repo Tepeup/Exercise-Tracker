@@ -320,3 +320,84 @@ justify-self: center;
   width: 150px !important;
   border: none !important
 }
+
+
+
+.exercise-icons{
+  display: grid;
+  grid-template-columns: repeat(5,1fr);
+  padding:1em 0;
+}
+
+.exercise-icons button{
+ background-color: inherit;
+ border: none;
+ color:white;
+ margin:0 !important;
+}
+
+.modal-input{
+  min-width: 300px;
+  width:100%;
+  background-color: white;
+  border: none;
+  margin: 1em 0;
+  height: 70px;
+  border-radius: 1em;
+  padding: .5em;
+}
+
+.modal-submit{
+width:100%;
+margin-top:1em;
+
+border-radius: 1em;
+border: none;
+background-color: white;
+font-weight: bold;
+padding: .5em;
+}
+.workout-modal{
+
+  padding:1em;
+  overflow-y: scroll;
+  width:100vw;
+  height:100vh;
+  color:white;
+  justify-content: center;
+  display: grid;
+  text-align: center;
+  grid-auto-rows: auto;
+  position: relative;;
+
+ 
+}
+
+.modal-close{
+  position: absolute;
+  top: .5em;
+  right:.5em;
+  font-size: 1.5em;
+  background-color: inherit;
+  border: none;
+  color:inherit
+}
+
+.workout-modal button {
+  max-height: 50px ;
+  margin-bottom: 3em;
+}
+
+h1,h4{
+  margin:1em 0
+}
+button{
+  cursor: pointer;
+}
+
+.active-button{
+  color:black !important;
+  background-color: white !important;
+  border-radius: 1em;
+  
+}
