@@ -66,14 +66,16 @@ export default function Calendar(props) {
   });
 
   const handleOpen = (month, day, year, week, weekDay) => {
-    setOpen({
-      state: true,
-      month: month,
-      day: day,
-      year: year,
-      week: week,
-      weekDay: weekDay,
-    });
+    if (!day == 0) {
+      setOpen({
+        state: true,
+        month: month,
+        day: day,
+        year: year,
+        week: week,
+        weekDay: weekDay,
+      });
+    }
   };
 
   const handleClose = () => {
