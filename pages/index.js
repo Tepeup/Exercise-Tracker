@@ -41,7 +41,7 @@ export default class Home extends React.Component {
       <div className={styles.container}>
         <Head>
           <title>Year Tracker</title>
-          <meta name="author" content="Tepeu Potter"></meta>
+          <meta name="author" content="T. Potter"></meta>
           <meta
             name="viewport"
             content="width=device-width, initial-scale=1.0"
