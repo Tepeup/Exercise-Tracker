@@ -12,14 +12,14 @@ export default function Dashboard(props) {
 
   // Hooks
   const [workoutColor, setWorkoutColor] = useState("#ff8606");
-  const [selectedColor, setSelectedColor] = useState(2);
+  // const [selectedColor, setSelectedColor] = useState(2);
   const [miniView, setMiniView] = useState(false);
 
-  let handleColorSelection = (el) => {
-    const colorBackground = el.target.style.backgroundColor;
-    setWorkoutColor(colorBackground);
-    setSelectedColor(el.target.id);
-  };
+  // let handleColorSelection = (el) => {
+  //   const colorBackground = el.target.style.backgroundColor;
+  //   setWorkoutColor(colorBackground);
+  //   setSelectedColor(el.target.id);
+  // };
 
   let handleMiniClick = () => {
     setMiniView(!miniView);

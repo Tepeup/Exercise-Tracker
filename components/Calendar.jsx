@@ -42,16 +42,6 @@ export default function Calendar(props) {
   const yearMonth = moment([todaysYear]).month(props.month).format("YYYY-MM");
   const daysInMonth = moment(yearMonth, "YYYY-MM").daysInMonth();
 
-  // Set window to current month
-  setTimeout(function () {
-    if (!props.mini) {
-      window.location.hash = `${currentMonthString}`;
-      if (currentMonthString == monthStringName) {
-        window.scrollBy(0, -50);
-      }
-    }
-  }, 300);
-
   // Hooks
   const classes = useStyles();
   const [cellInfo, setCellInfo] = useState(arrayToObjectArray);
@@ -124,6 +114,16 @@ export default function Calendar(props) {
           return;
         }
       });
+
+    // Set window to current month
+    setTimeout(function () {
+      if (!props.mini) {
+        window.location.hash = `${currentMonthString}`;
+        if (currentMonthString == monthStringName) {
+          window.scrollBy(0, -50);
+        }
+      }
+    }, 300);
   }, []);
 
   let handleModalSubmit = async (day, week, color, workout, notes) => {
