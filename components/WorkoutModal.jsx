@@ -110,10 +110,6 @@ export default function WorkoutModal(props) {
     setInput(event.target.value);
   };
 
-  console.log(
-    props.calendar[props.week][props.weekDay].colorCode,
-    colorPaletteValue
-  );
   return (
     <div
       className="workout-modal"

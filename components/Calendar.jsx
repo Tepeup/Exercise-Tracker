@@ -65,28 +65,37 @@ export default function Calendar(props) {
     weekDay: null,
   });
 
+  var dateObj = new Date();
+  var thismonth = dateObj.getUTCMonth() + 1; //months from 1-12
+
   const handleOpen = (month, day, year, week, weekDay) => {
     if (!day == 0) {
-      setOpen({
-        state: true,
-        month: month,
-        day: day,
-        year: year,
-        week: week,
-        weekDay: weekDay,
-      });
+      if (moment().month(month).format("M") < thismonth) {
+        setOpen({
+          state: true,
+          month: month,
+          day: day,
+          year: year,
+          week: week,
+          weekDay: weekDay,
+        });
+      } else if (moment().month(month).format("M") == thismonth) {
+        if (todaysDate >= day) {
+          setOpen({
+            state: true,
+            month: month,
+            day: day,
+            year: year,
+            week: week,
+            weekDay: weekDay,
+          });
+        }
+      }
     }
   };
 
   const handleClose = () => {
-    setOpen({
-      state: false,
-      month: null,
-      day: null,
-      year: null,
-      week: 0,
-      weekDay: 0,
-    });
+    setOpen({ ...open, state: false, month: null, day: null, year: null });
   };
 
   const reducer = (accumulator, currentValue) => accumulator + currentValue;
@@ -117,39 +126,10 @@ export default function Calendar(props) {
       });
   }, []);
 
-  let handleCellClick = async (el) => {
-    if (el.target.className.includes("active")) {
-      let copyGrid = [...calendarData];
-
-      // might use in future
-      // const cellNumber = Number(el.target.id);
-
-      const xIndex = el.target.parentElement.getAttribute("data-index");
-      const yIndex = el.target.getAttribute("data-index");
-      let mutatedOject = copyGrid[xIndex][yIndex];
-
-      copyGrid[xIndex][yIndex] = { ...mutatedOject, colorCode: props.color };
-
-      await firebase
-        .firestore()
-        .collection("Charts")
-        .doc(`${props.user.id}`)
-        .collection(`${todaysYear}`)
-        .doc(`${monthStringName}`)
-        .set({ chartData: `${JSON.stringify(copyGrid)}` })
-        .catch((error) => {
-          alert(`Error`, error);
-        });
-
-      setCalendarData(copyGrid);
-    }
-  };
-
   let handleModalSubmit = async (day, week, color, workout, notes) => {
     let copyGrid = [...calendarData];
 
     let mutatedOject = copyGrid[week][day];
-    console.log(day, week, color, workout, notes);
 
     copyGrid[week][day] = {
       ...mutatedOject,
@@ -157,14 +137,7 @@ export default function Calendar(props) {
       workout: workout,
       notes: notes,
     };
-    setOpen({
-      state: false,
-      month: null,
-      day: null,
-      year: null,
-      week: 0,
-      weekDay: 0,
-    });
+    setOpen({ ...open, state: false, month: null, day: null, year: null });
 
     await firebase
       .firestore()
