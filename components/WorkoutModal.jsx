@@ -179,8 +179,6 @@ export default function WorkoutModal(props) {
           ></textarea>
         </form>
 
-        {props.calendar[props.week][props.weekDay].notes}
-
         <button
           className="modal-submit"
           onClick={(day, week) =>
