@@ -1,4 +1,4 @@
-## Exercise Tracking Application
+# Exercise Tracking Application
 
 Visual view of the days and intensities on a calendar with monthly and yearly views which can be toggled. 
 The color of the day is determined by the intesity. 
