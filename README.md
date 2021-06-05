@@ -13,7 +13,7 @@ Create an account to keep track of your results throughout the year or simply pr
 
 **Client:** React
 
-**Server:** Node, Express
+**Server:** Node
 
 **BackEnd:** Firebase
 
