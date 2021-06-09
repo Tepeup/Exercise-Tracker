@@ -51,6 +51,17 @@ export default class Home extends React.Component {
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Montserrat"
           />
+          <meta name="twitter:card" content="summary_large_image" />
+
+          <meta name="twitter:title" content="Exercise Tracker" />
+          <meta
+            name="twitter:description"
+            content="Track and view your workout's throughout the year in a simple pixelated view!"
+          />
+          <meta
+            name="twitter:image"
+            content="https://www.pixelatedyear.com/twitterpreview.png"
+          />
         </Head>
         <main className={styles.main}>
           {this.state.currentUser ? (
