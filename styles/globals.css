@@ -119,8 +119,12 @@ font-size: 1.2em !important;
   min-height: 0em !important; 
   color:transparent !important
 }
-
-
+@media only screen and (max-width: 600px) {
+.month-title-mini {
+  color: white;
+  font-size: 0.8em !important;
+  }
+}
 @media only screen and (max-width: 768px) {
   .cal-week {
     width:100vw;
@@ -146,10 +150,7 @@ font-size: 1.2em !important;
   li{
     font-size: 1.2em !important;
   }
-  .month-title-mini {
-    color: white;
-    font-size: 0.8em !important;
-    }
+
 }
 .cal-day{
   display: grid;
