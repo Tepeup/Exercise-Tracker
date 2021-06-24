@@ -96,8 +96,9 @@ padding:60px 0;
   padding: calc(60px + 2em) .5em;
   width: 768px;
   margin: 0 auto;
-  grid-gap:2em;
+  grid-gap:0.5em;
   justify-content: center;
+
   
 }
 .cal-month-container-mini {
@@ -106,7 +107,7 @@ padding:60px 0;
 }
 .month-title-mini {
 color: white;
-font-size: 0.8em !important;
+font-size: 1em !important;
 }
 .month-title-mini svg{
  width: 10px;
@@ -130,7 +131,7 @@ font-size: 0.8em !important;
   .cal-year-mini{
     display: grid;
     grid-template-columns: repeat(2,1fr) !important;
-    grid-gap:.5em;
+    
     padding: calc(50px + 2em) .5em;
     width:100vw;
   
@@ -145,6 +146,10 @@ font-size: 0.8em !important;
   li{
     font-size: 1.2em !important;
   }
+  .month-title-mini {
+    color: white;
+    font-size: 0.8em !important;
+    }
 }
 .cal-day{
   display: grid;
