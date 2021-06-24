@@ -181,15 +181,16 @@ export default function WorkoutModal(props) {
 
         <button
           className="modal-submit"
-          onClick={(day, week) =>
+          onClick={(day, week) => {
             props.submit(
               props.weekDay,
               props.week,
               colorPalette[value - 1],
               icon,
               input
-            )
-          }
+            );
+            this.reward.rewardMe();
+          }}
         >
           SUBMIT
         </button>

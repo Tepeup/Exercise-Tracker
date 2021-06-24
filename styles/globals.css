@@ -63,7 +63,7 @@ a {
 
 
 .cal-year{
-padding:82px 0;
+padding:60px 0;
 
 }
 
@@ -93,7 +93,7 @@ padding:82px 0;
 .cal-year-mini {
   display: grid;
   grid-template-columns: repeat(2,1fr) !important;
-  padding: calc(82px + 2em) .5em;
+  padding: calc(60px + 2em) .5em;
   width: 768px;
   margin: 0 auto;
   grid-gap:2em;
@@ -105,7 +105,11 @@ padding:82px 0;
 
 }
 .month-title-mini {
-display: none;
+color: white;
+font-size: 0.8em !important;
+}
+.month-title-mini svg{
+ width: 10px;
 }
 .cal-week-mini {
   width:300px;
@@ -121,13 +125,13 @@ display: none;
     width:100vw;
   }
   .cal-year{
-    padding: 82px .5em
+    padding: 60px .5em
   }
   .cal-year-mini{
     display: grid;
     grid-template-columns: repeat(2,1fr) !important;
     grid-gap:.5em;
-    padding: calc(82px + 2em) .5em;
+    padding: calc(50px + 2em) .5em;
     width:100vw;
   
   }
@@ -136,7 +140,7 @@ display: none;
   }
   .month-title{
     padding-left: .5em !important;
-    font-size:1.5em !important
+    font-size:1.5em;
   }
   li{
     font-size: 1.2em !important;
@@ -214,7 +218,7 @@ ul {
   width:100vw;
   max-width: 800px;
   align-content: center;
-  padding: 1em;
+  padding: 0.5em 1em;
   justify-content: space-between;
 }
 
