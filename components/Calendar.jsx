@@ -23,8 +23,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Calendar(props) {
   // Converting the calendar array form calendar-js to an array of objects with relevant info
   let arrayToObjectArray = calendar()
-    //.of(moment().year(), props.month)
-    .of(2021, props.month)
+    .of(moment().year(), props.month)
     .calendar.map((el) =>
       el.map((el) => ({
         date: el,
@@ -37,8 +36,7 @@ export default function Calendar(props) {
 
   const todaysMonth = moment().month();
   const todaysDate = moment().date();
-  //const todaysYear = moment().year();
-  const todaysYear = 2021;
+  const todaysYear = moment().year();
   const currentMonthString = moment().month(todaysMonth).format("MMMM");
   const monthStringName = moment().month(props.month).format("MMMM");
   const yearMonth = moment([todaysYear]).month(props.month).format("YYYY-MM");
@@ -216,21 +214,31 @@ export default function Calendar(props) {
       </div>
       <span className={`month-title ${props.mini && "month-title-mini"}`}>
         {`${monthStringName} ${todaysYear}  `}
-        <FontAwesomeIcon
-          id={attempt > 5 ? "complete" : "incomplete"}
-          icon={faStar}
-          title={` One Star 5/${daysInMonth} days`}
-        />{" "}
-        <FontAwesomeIcon
-          id={attempt > 15 ? "complete" : "incomplete"}
-          icon={faStar}
-          title={`Two Star 10/${daysInMonth} days`}
-        />{" "}
-        <FontAwesomeIcon
-          id={attempt > 25 ? "complete" : "incomplete"}
-          icon={faStar}
-          title={`Three Star 20/${daysInMonth} days`}
-        />
+        {attempt > 35 ? (
+          <div>
+            <FontAwesomeIcon id={"diamond"} icon={faStar} title={`Diamond`} />{" "}
+            <FontAwesomeIcon id={"diamond"} icon={faStar} title={`Diamond`} />{" "}
+            <FontAwesomeIcon id={"diamond"} icon={faStar} title={`Diamond`} />
+          </div>
+        ) : (
+          <div>
+            <FontAwesomeIcon
+              id={attempt >= 5 ? "complete" : "incomplete"}
+              icon={faStar}
+              title={` One Star 5 points`}
+            />{" "}
+            <FontAwesomeIcon
+              id={attempt >= 15 ? "complete" : "incomplete"}
+              icon={faStar}
+              title={`Two Star 15 points`}
+            />{" "}
+            <FontAwesomeIcon
+              id={attempt >= 25 ? "complete" : "incomplete"}
+              icon={faStar}
+              title={`Three Star 25 points`}
+            />
+          </div>
+        )}
       </span>
       <div
         className={`cal-month ${props.mini && "cal-month-mini"}`}

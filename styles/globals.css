@@ -201,6 +201,13 @@ font-size: 1.2em !important;
   color: #EDE92C
 }
 
+#diamond {
+  color: rgb(117, 188, 255);
+  stroke: #646464;
+  stroke-width: 3px;
+  font-size: large;
+}
+
 
 .dashboard {
   width: 100vw;
@@ -211,7 +218,10 @@ font-size: 1.2em !important;
 .month-title {
   font-size: 1.8em;
   font-weight: bold;
-  padding: 1em 0em
+  padding: 1em 0em;
+  display: flex;
+  justify-content: space-between;
+  padding-right: .3em;
 
 }
 

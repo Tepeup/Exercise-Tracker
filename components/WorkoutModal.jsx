@@ -189,7 +189,7 @@ export default function WorkoutModal(props) {
               icon,
               input
             );
-            this.reward.rewardMe();
+            //this.reward.rewardMe();
           }}
         >
           SUBMIT
