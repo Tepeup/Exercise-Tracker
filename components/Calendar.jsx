@@ -23,7 +23,8 @@ const useStyles = makeStyles((theme) => ({
 export default function Calendar(props) {
   // Converting the calendar array form calendar-js to an array of objects with relevant info
   let arrayToObjectArray = calendar()
-    .of(moment().year(), props.month)
+    //.of(moment().year(), props.month)
+    .of(2021, props.month)
     .calendar.map((el) =>
       el.map((el) => ({
         date: el,
@@ -36,7 +37,8 @@ export default function Calendar(props) {
 
   const todaysMonth = moment().month();
   const todaysDate = moment().date();
-  const todaysYear = moment().year();
+  //const todaysYear = moment().year();
+  const todaysYear = 2021;
   const currentMonthString = moment().month(todaysMonth).format("MMMM");
   const monthStringName = moment().month(props.month).format("MMMM");
   const yearMonth = moment([todaysYear]).month(props.month).format("YYYY-MM");
@@ -91,8 +93,29 @@ export default function Calendar(props) {
   const reducer = (accumulator, currentValue) => accumulator + currentValue;
   const attempt = calendarData
     .map((x) =>
-      x.map((e) =>
-        e.colorCode == "#556171" || e.colorCode == "rgb(85, 97, 113)" ? 0 : 1
+      x.map(
+        (e) => {
+          switch (e.colorCode) {
+            case "#556171" || "rgb(85, 97, 113)":
+              return 0;
+              break;
+            case "#ede900" || "rgb(237, 233, 0)":
+              return 1;
+              break;
+            case "#ff8606" || "rgb(255, 134, 6)":
+              return 2;
+              break;
+            case "#e83b36" || "rgb(232, 59, 54)":
+              return 3;
+              break;
+            case "#600538" || "rgb(96, 5, 56)":
+              return 5;
+              break;
+            default:
+              return 0;
+          }
+        }
+        // e.colorCode == "#556171" || e.colorCode == "rgb(85, 97, 113)" ? 0 : 1
       )
     )
     .map((x) => x.reduce(reducer))
@@ -194,17 +217,17 @@ export default function Calendar(props) {
       <span className={`month-title ${props.mini && "month-title-mini"}`}>
         {`${monthStringName} ${todaysYear}  `}
         <FontAwesomeIcon
-          id={attempt > 4 ? "complete" : "incomplete"}
+          id={attempt > 5 ? "complete" : "incomplete"}
           icon={faStar}
           title={` One Star 5/${daysInMonth} days`}
         />{" "}
         <FontAwesomeIcon
-          id={attempt > 9 ? "complete" : "incomplete"}
+          id={attempt > 15 ? "complete" : "incomplete"}
           icon={faStar}
           title={`Two Star 10/${daysInMonth} days`}
         />{" "}
         <FontAwesomeIcon
-          id={attempt > 19 ? "complete" : "incomplete"}
+          id={attempt > 25 ? "complete" : "incomplete"}
           icon={faStar}
           title={`Three Star 20/${daysInMonth} days`}
         />
