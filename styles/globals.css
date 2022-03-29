@@ -202,10 +202,9 @@ font-size: 1.2em !important;
 }
 
 #diamond {
-  color: rgb(117, 188, 255);
-  stroke: #646464;
-  stroke-width: 3px;
-  font-size: large;
+  color: rgb(137, 198, 255);
+  filter:drop-shadow(0px 0px 7px white)
+ 
 }
 
 
