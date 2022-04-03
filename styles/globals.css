@@ -162,6 +162,7 @@ font-size: 1.2em !important;
   color:white;
   transition: background-color 1s;
   box-shadow:0px 0px 0px 2px #21262b1f inset;
+  aspect-ratio: 1 / 1;
 }
 
 .cal-day:hover{
